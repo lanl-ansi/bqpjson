@@ -10,3 +10,17 @@ def test_000():
         data = json.load(file)
 
     bqpjson.validate(data)
+
+
+def test_001():
+    with open(os.path.join(data_dir, '001.json')) as file:
+        data = json.load(file)
+
+    bqpjson.validate(data)
+
+
+def test_002():
+    with open(os.path.join(data_dir, '002.json')) as file:
+        data = json.load(file)
+
+    bqpjson.validate(data)
