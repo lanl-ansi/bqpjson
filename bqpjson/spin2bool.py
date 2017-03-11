@@ -2,9 +2,8 @@
 
 import sys, json, argparse, copy
 
-from common import print_err
-from common import validate_bqp_data
-from common import json_dumps_kwargs
+from bqpjson.core import print_err
+from bqpjson.core import validate
 
 # converts a B-QP json file from the ising space to the boolean space and vise versa.
 def main(args):
@@ -16,13 +15,13 @@ def main(args):
 
     output_data = transform(data)
 
-    validate_bqp_data(output_data)
+    validate(output_data)
     output_string = json.dumps(output_data, **json_dumps_kwargs)
     print(output_string)
 
 
 def transform(data):
-    validate_bqp_data(data)
+    validate(data)
     if data['variable_domain'] == 'spin':
         output_data = spin_to_bool(data)
     else:

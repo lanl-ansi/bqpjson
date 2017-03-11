@@ -2,8 +2,8 @@
 
 import sys, json, argparse
 
-from common import print_err
-from common import validate_bqp_data
+from bqpjson.core import print_err
+from bqpjson.core import validate
 
 # converts a bqp-json file to a qubist hamiltonian
 def main(args, data_stream):
@@ -12,7 +12,7 @@ def main(args, data_stream):
     except:
         print_err('unable to parse stdin as a json document')
         quit()
-    validate_bqp_data(data)
+    validate(data)
 
     if data['variable_domain'] == 'boolean':
         print_err('Error: unable to generate qubist hamiltonian from stdin, only spin domains are supported by qubist')

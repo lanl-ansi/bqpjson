@@ -2,8 +2,8 @@ import os, sys, json
 import jsonschema
 
 # prints a line to standard error
-#def print_err(data):
-#    sys.stderr.write(str(data)+'\n')
+def print_err(data):
+    sys.stderr.write(str(data)+'\n')
 
 with open(os.path.join(os.path.dirname(os.path.abspath(__file__)), 'bqpjson-schema.json')) as file:
     _qbpjson_schema = json.load(file)
@@ -11,8 +11,8 @@ with open(os.path.join(os.path.dirname(os.path.abspath(__file__)), 'bqpjson-sche
 _bqpjson_versions = ['0.1.0']
 _bqpjson_version_latest = _bqpjson_versions[-1]
 
-def validate(data=data):
-    jsonschema.validate(data, qbpjson_schema)
+def validate(data):
+    jsonschema.validate(data, _qbpjson_schema)
 
     var_ids = {i in data['variable_ids']}
     for lt in data['linear_terms']:
