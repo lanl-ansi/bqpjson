@@ -14,7 +14,7 @@ _bqpjson_version_latest = _bqpjson_versions[-1]
 def validate(data):
     jsonschema.validate(data, _qbpjson_schema)
 
-    var_ids = {i in data['variable_ids']}
+    var_ids = {i for i in data['variable_ids']}
     for lt in data['linear_terms']:
         assert(lt['id'] in var_ids)
 
