@@ -30,7 +30,7 @@ def main(args, data_stream):
             print_err('Warning: merging multiple values quadratic terms between {},{}'.format(i,j))
             quadratic_terms[pair] = quadratic_terms[pair] + qt['coeff']
 
-    sites = max(data['variable_ids'])+1
+    sites = max(data['variable_ids'])+1 if len(data['variable_ids']) > 0 else 0
     lines = len(data['linear_terms']) + len(data['quadratic_terms'])
 
     print('{} {}'.format(sites, lines))

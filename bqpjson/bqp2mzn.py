@@ -21,7 +21,7 @@ def main(args, data_stream):
     print('% ')
 
     for k in sorted(data['metadata']):
-         print('% {} : {}'.format(k, data['metadata'][k]))
+         print('% {} : {}'.format(k, json.dumps(data['metadata'][k], sort_keys=True)))
 
     print('')
     if data['variable_domain'] == 'boolean':
@@ -59,7 +59,7 @@ def main(args, data_stream):
     #     objective_terms.append('{}*x[{}]*x[{}]'.format(qt['coeff'], qt['id_tail'], qt['id_head']))
 
     print('')
-    objective_expr = ' + '.join(objective_terms)
+    objective_expr = ' + '.join(objective_terms) if len(objective_terms) > 0 else '0'
     print('var float: objective = {};'.format(objective_expr))
 
     print('')

@@ -11,6 +11,12 @@ with open(os.path.join(os.path.dirname(os.path.abspath(__file__)), 'bqpjson-sche
 _bqpjson_versions = ['0.1.0']
 _bqpjson_version_latest = _bqpjson_versions[-1]
 
+json_dumps_kwargs = {
+    'sort_keys':True,
+    'indent':2,
+    'separators':(',', ': ')
+}
+
 def validate(data):
     jsonschema.validate(data, _qbpjson_schema)
 

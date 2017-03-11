@@ -4,6 +4,7 @@ import sys, json, argparse, copy
 
 from bqpjson.core import print_err
 from bqpjson.core import validate
+from bqpjson.core import json_dumps_kwargs
 
 # converts a B-QP json file from the ising space to the boolean space and vise versa.
 def main(args):

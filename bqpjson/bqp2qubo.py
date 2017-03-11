@@ -29,11 +29,11 @@ def main(args, data_stream):
     print('c ')
 
     for k in sorted(data['metadata']):
-         print('c {} : {}'.format(k, data['metadata'][k]))
+         print('c {} : {}'.format(k, json.dumps(data['metadata'][k], sort_keys=True)))
     if len(data['metadata']):
         print('c ')
 
-    max_index = max(data['variable_ids'])+1
+    max_index = max(data['variable_ids'])+1 if len(data['variable_ids']) > 0 else 0
     num_diagonals = len(data['linear_terms'])
     num_elements = len(data['quadratic_terms'])
 

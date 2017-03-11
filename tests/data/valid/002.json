@@ -18,7 +18,7 @@
     {"coeff":  1.5, "id_head": 6, "id_tail": 2}
   ],
   "scale": 2.7,
-  "variable_domain": "boolean",
+  "variable_domain": "spin",
   "variable_ids": [2,4,6],
   "version": "0.1.0"
 }
