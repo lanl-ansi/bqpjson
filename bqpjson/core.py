@@ -5,8 +5,7 @@ from functools import partial
 import jsonschema
 
 # prints a line to standard error
-def print_err(data):
-    sys.stderr.write(str(data)+'\n')
+print_err = partial(print, file=sys.stderr)
 
 with open(os.path.join(os.path.dirname(os.path.abspath(__file__)), 'bqpjson-schema.json')) as file:
     _qbpjson_schema = json.load(file)

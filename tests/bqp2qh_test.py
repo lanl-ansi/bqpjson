@@ -32,6 +32,7 @@ def test_bqp2qh_bool(bqp_file, capsys):
     with open(bqp_file, 'r') as file:
         data_bool = json.load(file)
 
+    #data_spin = data_bool
     data_spin = spin2bool.swap_variable_domain(data_bool)
 
     # python 2
