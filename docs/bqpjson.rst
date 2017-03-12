@@ -4,14 +4,6 @@ bqpjson package
 .. Submodules
 .. ----------
 
-bqpjson.cli module
-------------------
-
-.. automodule:: bqpjson.cli
-    :members:
-    :undoc-members:
-    :show-inheritance:
-
 bqpjson.core module
 -------------------
 
@@ -20,6 +12,13 @@ bqpjson.core module
     :undoc-members:
     :show-inheritance:
 
+bqpjson.cli module
+------------------
+
+.. automodule:: bqpjson.cli
+    :members:
+    :undoc-members:
+    :show-inheritance:
 
 Module contents
 ---------------
