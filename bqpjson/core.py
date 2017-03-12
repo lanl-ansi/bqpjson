@@ -61,6 +61,17 @@ def validate(data):
             assert(len(sol_var_ids) == len(var_ids))
 
 
+# TOOD what is the best data form for the assignment?
+def evaluate(data, assignment):
+    validate(data)
+
+    value = data['offset'] \
+        + sum(lt['coeff']*assignment[lt['id']] for lt in data['linear_terms']) \
+        + sum(qt['coeff']*assignment[qt['id_tail']]*assignment[qt['id_head']] for qt in data['quadratic_terms'])
+
+    return data['scale']*value
+
+
 def swap_variable_domain(data):
     validate(data)
     if data['variable_domain'] == 'spin':

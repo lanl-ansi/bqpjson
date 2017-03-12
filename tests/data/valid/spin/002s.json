@@ -19,7 +19,7 @@
     {
       "id": 0,
       "description": "first solution",
-      "evaluation": -123.0,
+      "evaluation": 6.291,
       "assignment": [
         {"id":1, "value": -1},
         {"id":3, "value":  1},
@@ -29,7 +29,7 @@
     {
       "id": 1,
       "description": "second solution",
-      "evaluation": -123.0,
+      "evaluation": 9.531,
       "assignment": [
         {"id":1, "value":  1},
         {"id":3, "value": -1},
