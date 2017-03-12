@@ -26,13 +26,13 @@ with open(os.path.join(os.path.dirname(__file__), 'README.rst')) as readme:
 
 
 classifiers = [
-#    'Development Status :: 5 - Production/Stable',
-#    'Intended Audience :: Developers',
-#    'License :: OSI Approved :: MIT License',
+    'Development Status :: 4 - Beta',
+    'Intended Audience :: Developers',
+    'License :: OSI Approved :: BSD License',
     'Operating System :: OS Independent',
     'Programming Language :: Python',
-    'Programming Language :: Python :: 2',
-    'Programming Language :: Python :: 2.7',
+#    'Programming Language :: Python :: 2',
+#    'Programming Language :: Python :: 2.7',
     'Programming Language :: Python :: 3',
     'Programming Language :: Python :: 3.5',
 #    'Programming Language :: Python :: Implementation :: CPython',
@@ -44,9 +44,10 @@ setup(
     name='bqpjson',
     version=find_version('bqpjson', '__init__.py'),
     packages=['bqpjson'],
-    package_data={'bqpjson': ['bqpjson/*.json']},
+    package_data={'bqpjson': ['*.json']},
+    #data_files=[('bqpjson', ['bqpjson/*.json'])],
     setup_requires=['jsonschema>=2.6.0'],
-    #extras_require={'testing': ['pytest']}
+    #extras_require={'testing': ['pytest']},
     author='Carleton Coffrin',
     author_email='cjc@lanl.gov',
     classifiers=classifiers,
