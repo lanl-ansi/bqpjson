@@ -61,10 +61,19 @@ def validate(data):
             assert(len(sol_var_ids) == len(var_ids))
 
 
-# TOOD what is the best data form for the assignment?
-def evaluate(data, assignment):
+def evaluate(data):
     validate(data)
 
+    values = []
+    if 'solutions' in data:
+        for solution in data['solutions']:
+            assignment = {item['id']:item['value'] for item in solution['assignment']}
+            values.append(_evaluate(data, assignment))
+
+    return values
+
+
+def _evaluate(data, assignment):
     value = data['offset'] \
         + sum(lt['coeff']*assignment[lt['id']] for lt in data['linear_terms']) \
         + sum(qt['coeff']*assignment[qt['id_tail']]*assignment[qt['id_head']] for qt in data['quadratic_terms'])
