@@ -3,6 +3,7 @@ bqpjson
 ==========
 
 dev:
+
 .. image:: https://travis-ci.org/lanl-ansi/bqpjson.svg?branch=master
     :target: https://travis-ci.org/lanl-ansi/bqpjson
 .. image:: https://codecov.io/gh/lanl-ansi/bqpjson/branch/master/graph/badge.svg
