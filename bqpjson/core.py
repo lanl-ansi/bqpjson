@@ -17,6 +17,8 @@ _bqpjson_version_latest = _bqpjson_versions[-1]
 def validate(data):
     jsonschema.validate(data, _qbpjson_schema)
 
+    assert(data['version'] == _bqpjson_version_latest)
+
     assert(data['scale'] >= 0.0)
 
     var_ids = {i for i in data['variable_ids']}
@@ -26,7 +28,7 @@ def validate(data):
         assert(lt['id'] not in lt_vars)
         lt_vars.add(lt['id'])
 
-    qt_var_pairs = set([])
+    qt_var_pairs = set()
     for qt in data['quadratic_terms']:
         assert(qt['id_tail'] in var_ids)
         assert(qt['id_head'] in var_ids)
@@ -39,17 +41,24 @@ def validate(data):
         qt_var_pairs.add(pair)
 
     if 'solutions' in data:
+        spin_var_domain = data['variable_domain'] == 'spin'
+        boolean_var_domain = data['variable_domain'] == 'boolean'
+        solution_ids = set()
         for solution in data['solutions']:
-            sol_ids = {}
+            assert(solution['id'] not in solution_ids)
+            solution_ids.add(solution['id'])
+
+            sol_var_ids = set()
             for assign in solution['assignment']:
-                assert(assign['id'] in var_ids)
-                assert(not assign['id'] in sol_ids)
-                sol_ids.add(assign['id'])
-                if data['variable_domain'] == 'spin':
+                var_id = assign['id']
+                assert(var_id in var_ids)
+                assert(var_id not in sol_ids)
+                sol_var_ids.add(var_id)
+                if spin_var_domain:
                     assert(assign['value'] == -1 or assign['value'] == 1)
-                if data['variable_domain'] == 'boolean':
+                if boolean_var_domain:
                     assert(assign['value'] == 0 or assign['value'] == 1)
-            assert(len(sol_ids) == len(var_ids))
+            assert(len(sol_var_ids) == len(var_ids))
 
 
 def swap_variable_domain(data):
