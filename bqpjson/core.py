@@ -52,7 +52,7 @@ def validate(data):
             for assign in solution['assignment']:
                 var_id = assign['id']
                 assert(var_id in var_ids)
-                assert(var_id not in sol_ids)
+                assert(var_id not in sol_var_ids)
                 sol_var_ids.add(var_id)
                 if spin_var_domain:
                     assert(assign['value'] == -1 or assign['value'] == 1)
