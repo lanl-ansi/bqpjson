@@ -20,9 +20,13 @@ def validate(data):
     assert(data['scale'] >= 0.0)
 
     var_ids = {i for i in data['variable_ids']}
+    lt_vars = set([])
     for lt in data['linear_terms']:
         assert(lt['id'] in var_ids)
+        assert(lt['id'] not in lt_vars)
+        lt_vars.add(lt['id'])
 
+    qt_var_pairs = set([])
     for qt in data['quadratic_terms']:
         assert(qt['id_tail'] in var_ids)
         assert(qt['id_head'] in var_ids)
@@ -30,6 +34,9 @@ def validate(data):
         if qt['id_tail'] > qt['id_head']:
             # TODO warn
             pass
+        pair = (qt['id_tail'], qt['id_head'])
+        assert(pair not in qt_var_pairs)
+        qt_var_pairs.add(pair)
 
     if 'solutions' in data:
         for solution in data['solutions']:
