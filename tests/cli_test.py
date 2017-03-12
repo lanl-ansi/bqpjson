@@ -1,15 +1,11 @@
 import sys, os, pytest, json
 
-# python 2
-#from cStringIO import StringIO
-# python 3
-import io
-
 import bqpjson
 
 from common_test import valid_spin_bqp_files
 from common_test import valid_bool_bqp_files
 from common_test import valid_bqp_files
+from common_test import StringIO
 
 
 def check_run_func(func, input_file, base_file):
@@ -17,7 +13,7 @@ def check_run_func(func, input_file, base_file):
         base = file.read()
 
     with open(input_file, 'r') as file:
-        out = io.StringIO()
+        out = StringIO()
         func(file, out)
 
     assert(out.getvalue().strip() == base.strip())
@@ -41,11 +37,11 @@ def test_run_spin2bool_spin(bqp_file):
         base = file.read()
 
     with open(bqp_file, 'r') as file:
-        out_bool = io.StringIO()
+        out_bool = StringIO()
         bqpjson.cli.run_spin2bool(file, out_bool)
 
-    out = io.StringIO()
-    bqpjson.cli.run_bqp2qubo(io.StringIO(out_bool.getvalue()), out)
+    out = StringIO()
+    bqpjson.cli.run_bqp2qubo(StringIO(out_bool.getvalue()), out)
 
     assert(out.getvalue().strip() == base.strip())
 
