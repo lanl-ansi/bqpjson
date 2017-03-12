@@ -86,6 +86,7 @@ def swap_variable_domain(data):
     if data['variable_domain'] == 'spin':
         output_data = spin_to_bool(data)
     else:
+        assert(data['variable_domain'] == 'boolean')
         output_data = bool_to_spin(data)
     return output_data
 
@@ -103,7 +104,7 @@ def spin_to_bool(ising_data):
     for linear_term in ising_data['linear_terms']:
         v_id = linear_term['id']
         coeff = linear_term['coeff']
-        assert(coeff != 0.0)
+        #assert(coeff != 0.0)
 
         coefficients[(v_id, v_id)] = 2.0*coeff
         offset += -coeff
@@ -111,12 +112,8 @@ def spin_to_bool(ising_data):
     for quadratic_term in ising_data['quadratic_terms']:
         v_id1 = quadratic_term['id_tail']
         v_id2 = quadratic_term['id_head']
-        assert(v_id1 != v_id2)
-        # if v_id1 > v_id2:
-        #     v_id1 = quadratic_term['id_head']
-        #     v_id2 = quadratic_term['id_tail']
         coeff = quadratic_term['coeff']
-        assert(coeff != 0.0)
+        #assert(coeff != 0.0)
 
         if not (v_id1, v_id2) in coefficients:
             coefficients[(v_id1, v_id2)] = 0.0
@@ -165,7 +162,7 @@ def bool_to_spin(bool_data):
     for linear_term in bool_data['linear_terms']:
         v_id = linear_term['id']
         coeff = linear_term['coeff']
-        assert(coeff != 0.0)
+        #assert(coeff != 0.0)
 
         coefficients[(v_id, v_id)] = coeff/2.0
         offset += linear_term['coeff']/2.0
@@ -173,12 +170,8 @@ def bool_to_spin(bool_data):
     for quadratic_term in bool_data['quadratic_terms']:
         v_id1 = quadratic_term['id_tail']
         v_id2 = quadratic_term['id_head']
-        assert(v_id1 != v_id2)
-        # if v_id1 > v_id2:
-        #     v_id1 = quadratic_term['id_head']
-        #     v_id2 = quadratic_term['id_tail']
         coeff = quadratic_term['coeff']
-        assert(coeff != 0.0)
+        #assert(coeff != 0.0)
 
         if not (v_id1, v_id2) in coefficients:
             coefficients[(v_id1, v_id2)] = 0.0
