@@ -47,7 +47,6 @@ setup(
     version=find_version('bqpjson', '__init__.py'),
     packages=['bqpjson'],
     package_data={'bqpjson': ['*.json']},
-    #data_files=[('bqpjson', ['bqpjson/*.json'])],
     setup_requires=['jsonschema>=2.6.0'],
     #extras_require={'testing': ['pytest']},
     author='Carleton Coffrin',
@@ -56,7 +55,7 @@ setup(
     description='utilities for working with bqp-json data',
     license='BSD',
     long_description=long_description,
-    url='https://github.com/tbd',
+    url='https://github.com/lanl-ansi/bqpjson',
     entry_points={'console_scripts': [
         'bqp2qh = bqpjson.cli:bqp2qh',
         'bqp2qubo = bqpjson.cli:bqp2qubo',
