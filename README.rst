@@ -1,15 +1,20 @@
 ==========
 bqpjson
 ==========
+Utilities for working with bqpjson data
 
-dev:
+**dev status:**
 
 .. image:: https://travis-ci.org/lanl-ansi/bqpjson.svg?branch=master
-    :target: https://travis-ci.org/lanl-ansi/bqpjson
+  :target: https://travis-ci.org/lanl-ansi/bqpjson
+  :alt: Build Report
 .. image:: https://codecov.io/gh/lanl-ansi/bqpjson/branch/master/graph/badge.svg
   :target: https://codecov.io/gh/lanl-ansi/bqpjson
+  :alt: Coverage Report
+.. image:: https://readthedocs.org/projects/bqpjson/badge/?version=latest
+  :target: http://bqpjson.readthedocs.io/en/latest/?badge=latest
+  :alt: Documentation Status
 
-Utilities for working with bqpjson data
 
 The bqpjson toolset includes:
 
