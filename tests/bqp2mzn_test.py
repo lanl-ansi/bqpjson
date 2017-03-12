@@ -15,7 +15,7 @@ def test_bqp2mzn(bqp_file, capsys):
 
     with open(bqp_file, 'r') as file:
         data = json.load(file)
-    bqpjson.bqpjson_to_mzn(data, sys.stdout)
+    bqpjson.bqpjson_to_minizinc(data, sys.stdout)
 
     out, err = capsys.readouterr()
 

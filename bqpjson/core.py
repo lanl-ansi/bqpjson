@@ -293,7 +293,7 @@ def bqpjson_to_qubo(data, out_stream):
         print2out('{} {} {}'.format(term['id_tail'], term['id_head'], term['coeff']))
 
 
-def bqpjson_to_mzn(data, out_stream):
+def bqpjson_to_minizinc(data, out_stream):
     validate(data)
 
     print2out = partial(print, file=out_stream)

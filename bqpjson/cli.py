@@ -6,7 +6,7 @@ from bqpjson import validate
 from bqpjson import swap_variable_domain
 from bqpjson import bqpjson_to_qubist
 from bqpjson import bqpjson_to_qubo
-from bqpjson import bqpjson_to_mzn
+from bqpjson import bqpjson_to_minizinc
 
 _json_pretty_print_kwargs = {
     'sort_keys':True,
@@ -48,7 +48,7 @@ def run_bqp2qubo():
 # converts a bqp-json file to a qubist hamiltonian
 def run_bqp2mzn():
     data = load_data()
-    bqpjson_to_mzn(data=data, out_stream=sys.stdout)
+    bqpjson_to_minizinc(data=data, out_stream=sys.stdout)
 
 def bqp2mzn():
     parser = argparse.ArgumentParser(description='a command line tool for converting a bqp-json files to a qubist hamiltonians.  The default input is stdin and the default output is stdout.')
