@@ -2,9 +2,7 @@
 
 import sys, os, pytest, json, io
 
-#sys.path.append('.')
-import bqpjson.bqp2qh as bqp2qh
-import bqpjson.spin2bool as spin2bool
+import bqpjson
 
 from common_test import valid_spin_bqp_files
 from common_test import valid_bool_bqp_files
@@ -16,7 +14,7 @@ def test_bqp2qh_spin(bqp_file, capsys):
         base = file.read()
 
     with open(bqp_file, 'r') as file:
-        bqp2qh.main(None, file)
+        bqpjson.bqp2qh.main(None, file)
 
     out, err = capsys.readouterr()
 
@@ -33,14 +31,14 @@ def test_bqp2qh_bool(bqp_file, capsys):
         data_bool = json.load(file)
 
     #data_spin = data_bool
-    data_spin = spin2bool.swap_variable_domain(data_bool)
+    data_spin = bqpjson.swap_variable_domain(data_bool)
 
     # python 2
     #data_stream = StringIO(json.dumps(data_bool))
     # python 3
     data_stream = io.StringIO(json.dumps(data_spin))
 
-    bqp2qh.main(None, data_stream)
+    bqpjson.bqp2qh.main(None, data_stream)
 
     out, err = capsys.readouterr()
 

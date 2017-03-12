@@ -1,7 +1,7 @@
 import sys, os, pytest, json
 
 #sys.path.append('.')
-import bqpjson.spin2bool as spin2bool
+import bqpjson
 
 from common_test import valid_bqp_files
 
@@ -14,8 +14,8 @@ def test_spin2bool(bqp_file):
     with open(bqp_file) as file:
         data_0 = json.load(file)
 
-    data_1 = spin2bool.swap_variable_domain(data_0)
-    data_2 = spin2bool.swap_variable_domain(data_1)
+    data_1 = bqpjson.swap_variable_domain(data_0)
+    data_2 = bqpjson.swap_variable_domain(data_1)
 
     #print(json.dumps(data_2))
     #print('')
