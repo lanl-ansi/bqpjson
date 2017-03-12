@@ -54,7 +54,12 @@ setup(
     license='BSD',
     long_description=long_description,
     url='https://github.com/tbd',
-    #entry_points={'console_scripts': ['jsonschema = jsonschema.cli:main']},
+    entry_points={'console_scripts': [
+        'bqp2qh = bqpjson.cli:bqp2qh',
+        'bqp2qubo = bqpjson.cli:bqp2qubo',
+        'bqp2mzn = bqpjson.cli:bqp2mzn',
+        'spin2bool = bqpjson.cli:spin2bool'
+    ]},
     #vcversioner={'version_module_paths' : ['jsonschema/_version.py']},
 )
 

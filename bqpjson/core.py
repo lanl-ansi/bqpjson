@@ -1,6 +1,8 @@
 import os, sys, json, copy
 
+from io import IOBase
 from functools import partial
+#from functools import singledispatch
 
 import jsonschema
 
@@ -12,6 +14,19 @@ with open(os.path.join(os.path.dirname(os.path.abspath(__file__)), 'bqpjson-sche
 
 _bqpjson_versions = ['0.1.0']
 _bqpjson_version_latest = _bqpjson_versions[-1]
+
+
+# @singledispatch
+# def load_data(data):
+#     return data
+
+# @load_data.register(str)
+# def _(data):
+#     return json.loads(data)
+
+# @load_data.register(IOBase)
+# def _(data):
+#     return json.load(data)
 
 
 def validate(data):

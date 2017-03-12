@@ -3,7 +3,7 @@
 import sys, os, pytest, json
 
 #sys.path.append('.')
-import bqpjson.bqp2mzn as bqp2mzn
+import bqpjson
 
 from common_test import valid_bqp_files
 
@@ -14,7 +14,8 @@ def test_bqp2mzn(bqp_file, capsys):
         base = file.read()
 
     with open(bqp_file, 'r') as file:
-        bqp2mzn.main(None, file)
+        data = json.load(file)
+    bqpjson.bqpjson_to_mzn(data, sys.stdout)
 
     out, err = capsys.readouterr()
 

@@ -23,9 +23,10 @@ def test_bqp2qh_spin(bqp_file, capsys):
     # python 2
     #data_stream = StringIO(json.dumps(data_bool))
     # python 3
-    data_stream = io.StringIO(json.dumps(data_bool))
+    #data_stream = io.StringIO(json.dumps(data_bool))
 
-    bqpjson.bqp2qubo.main(None, data_stream)
+    #bqpjson.bqp2qubo.run(None, data_stream)
+    bqpjson.bqpjson_to_qubo(data_bool, sys.stdout)
 
     out, err = capsys.readouterr()
 
@@ -38,7 +39,10 @@ def test_bqp2qh_bool(bqp_file, capsys):
         base = file.read()
 
     with open(bqp_file, 'r') as file:
-        bqpjson.bqp2qubo.main(None, file)
+        data = json.load(file)
+
+    bqpjson.bqpjson_to_qubo(data, sys.stdout)
+
 
     out, err = capsys.readouterr()
 
