@@ -1,6 +1,6 @@
 import sys, os, pytest, json
 
-sys.path.append('.')
+#sys.path.append('.')
 import bqpjson.spin2bool as spin2bool
 
 from common_test import valid_bqp_files

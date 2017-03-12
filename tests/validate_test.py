@@ -1,7 +1,6 @@
 import json
 import pytest
 
-
 import bqpjson
 
 from common_test import valid_bqp_files

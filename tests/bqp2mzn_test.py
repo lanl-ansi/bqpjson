@@ -2,7 +2,7 @@
 
 import sys, os, pytest, json
 
-sys.path.append('.')
+#sys.path.append('.')
 import bqpjson.bqp2mzn as bqp2mzn
 
 from common_test import valid_bqp_files

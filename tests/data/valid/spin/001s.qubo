@@ -1,0 +1,19 @@
+c id : 0
+c description : simple model with quadratic_terms and metadata
+c 
+c scale : 2.7
+c offset : 1.93
+c 
+c some_key_1 : "any value"
+c some_key_2 : 0.3
+c some_key_3 : null
+c some_key_4 : ["one", 2, 3.7, null]
+c some_key_5 : {"one": 1, "three": null, "two": 2}
+c 
+p qubo 0 7 2 2
+c linear terms
+4 4 0.4
+6 6 -4.4
+c quadratic terms
+2 4 -0.8
+2 6 6.0
