@@ -218,7 +218,8 @@ An assignment object has the form,
       "value": <float>
     }
 
-Where: 
+Where:
+
 - *id* - is the variable identifier value, it must appear in the "variable\_ids" list 
 - *value* - this is the value given to that variable
 
@@ -245,6 +246,7 @@ A solution object has the form,
     }
 
 Where: 
+
 - *generated* - the utc time and date that the problem was generated 
 - *dwig\_generator* - the dwig algorithm used to generate the problem 
 - *dw\_url* - the url of the d-wave qpu used to generate the problem 
