@@ -1,10 +1,10 @@
 import json
 import pytest
-import math
 
 import bqpjson
 
 from common_test import valid_bqp_files
+from common_test import isclose
 
 @pytest.mark.parametrize('bqp_file', valid_bqp_files)
 def test_valid(bqp_file):
@@ -15,7 +15,7 @@ def test_valid(bqp_file):
 
     if 'solutions' in data:
         for i, solution in enumerate(data['solutions']):
-            assert(math.isclose(values[i], solution['evaluation']))
+            assert(isclose(values[i], solution['evaluation']))
     else:
         assert(len(values) == 0)
 

@@ -1,4 +1,4 @@
-import os
+import os, math
 
 data_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'data')
 valid_data_dir = os.path.join(data_dir, 'valid')
@@ -22,3 +22,9 @@ del wd, directory, files
 valid_bqp_files = valid_spin_bqp_files + valid_bool_bqp_files
 
 
+# to support version < py34
+try:
+    isclose = math.isclose
+except:
+    def isclose(a, b):
+        return abs(a-b) <= 1e-8
