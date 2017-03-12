@@ -14,7 +14,7 @@ _json_pretty_print_kwargs = {
     'separators':(',', ': ')
 }
 
-def load_data(data_steam = sys.stdin):
+def load_data(data_steam):
     try:
         data = json.load(data_steam)
     except:
@@ -29,9 +29,9 @@ def bqp2qh():
     args = parser.parse_args()
     run_bqp2qh()
 
-def run_bqp2qh():
-    data = load_data()
-    bqpjson_to_qubist(data=data, out_stream=sys.stdout)
+def run_bqp2qh(in_stream=sys.stdin, out_stream=sys.stdout):
+    data = load_data(data_steam=in_stream)
+    bqpjson_to_qubist(data=data, out_stream=out_stream)
 
 
 # converts a bqp-json file to a qubo data file
@@ -40,15 +40,15 @@ def bqp2qubo():
     args = parser.parse_args()
     run_bqp2qubo()
 
-def run_bqp2qubo():
-    data = load_data()
-    bqpjson_to_qubo(data=data, out_stream=sys.stdout)
+def run_bqp2qubo(in_stream=sys.stdin, out_stream=sys.stdout):
+    data = load_data(data_steam=in_stream)
+    bqpjson_to_qubo(data=data, out_stream=out_stream)
 
 
 # converts a bqp-json file to a qubist hamiltonian
-def run_bqp2mzn():
-    data = load_data()
-    bqpjson_to_minizinc(data=data, out_stream=sys.stdout)
+def run_bqp2mzn(in_stream=sys.stdin, out_stream=sys.stdout):
+    data = load_data(data_steam=in_stream)
+    bqpjson_to_minizinc(data=data, out_stream=out_stream)
 
 def bqp2mzn():
     parser = argparse.ArgumentParser(description='a command line tool for converting a bqp-json files to a qubist hamiltonians.  The default input is stdin and the default output is stdout.')
@@ -56,19 +56,18 @@ def bqp2mzn():
     run_bqp2mzn()
 
 
-
 # converts a B-QP json file from the ising space to the boolean space and vise versa.
-def run_spin2bool(pretty_print=False):
-    data = load_data()
+def run_spin2bool(in_stream=sys.stdin, out_stream=sys.stdout, pretty_print=False):
+    data = load_data(data_steam=in_stream)
     output_data = swap_variable_domain(data)
     if pretty_print:
-        print(json.dumps(output_data, **_json_pretty_print_kwargs))
+        print(json.dumps(output_data, **_json_pretty_print_kwargs), file=out_stream)
     else:
-        print(json.dumps(output_data, sort_keys=True))
+        print(json.dumps(output_data, sort_keys=True), file=out_stream)
 
 def spin2bool():
     parser = argparse.ArgumentParser(description='a command line tool for converting a B-QP json files from ising to boolean variables and back.  The default input is stdin and the default output is stdout.')
     parser.add_argument('-pp', '--pretty-print', help='pretty print json output', action='store_true', default=False)
     args = parser.parse_args()
-    run_spin2bool(args.pretty_print)
+    run_spin2bool(pretty_print=args.pretty_print)
 
