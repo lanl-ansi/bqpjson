@@ -6,13 +6,11 @@ from bqpjson.core import print_err
 from bqpjson.core import validate
 from bqpjson.core import swap_variable_domain
 
-
 json_dumps_kwargs = {
     'sort_keys':True,
     'indent':2,
     'separators':(',', ': ')
 }
-
 
 # converts a B-QP json file from the ising space to the boolean space and vise versa.
 def main(args):

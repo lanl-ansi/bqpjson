@@ -4,7 +4,7 @@ import sys, json, argparse
 
 from bqpjson.core import print_err
 from bqpjson.core import validate
-from bqpjson.core import bqpjson2mzn
+from bqpjson.core import bqpjson_to_mzn
 
 # converts a bqp-json file to a qubist hamiltonian
 def main(args, data_stream):
@@ -14,7 +14,7 @@ def main(args, data_stream):
         print_err('unable to parse stdin as a json document')
         quit()
 
-    bqpjson2mzn(data=data, out_stream=sys.stdout)
+    bqpjson_to_mzn(data=data, out_stream=sys.stdout)
 
 
 def build_cli_parser():
@@ -25,3 +25,4 @@ def build_cli_parser():
 if __name__ == '__main__':
     parser = build_cli_parser()
     main(parser.parse_args(), sys.stdin)
+

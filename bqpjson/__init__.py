@@ -2,8 +2,8 @@
 __version__ = '0.1.0'
 
 from bqpjson.core import (
-    validate, bqpjson2qh, bqpjson2qubo, bqpjson2mzn, 
-    swap_variable_domain, spin_to_bool, bool_to_spin
+    validate, swap_variable_domain, spin_to_bool, bool_to_spin,
+    bqpjson_to_qubist, bqpjson_to_qubo, bqpjson_to_mzn
 )
 
 from bqpjson.bqp2qh import (
