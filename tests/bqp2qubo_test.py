@@ -20,7 +20,7 @@ def test_bqp2qh_spin(bqp_file, capsys):
     with open(bqp_file, 'r') as file:
         data_spin = json.load(file)
 
-    data_bool = spin2bool.transform(data_spin)
+    data_bool = spin2bool.swap_variable_domain(data_spin)
 
     # python 2
     #data_stream = StringIO(json.dumps(data_bool))

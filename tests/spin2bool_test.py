@@ -14,8 +14,8 @@ def test_spin2bool(bqp_file):
     with open(bqp_file) as file:
         data_0 = json.load(file)
 
-    data_1 = spin2bool.transform(data_0)
-    data_2 = spin2bool.transform(data_1)
+    data_1 = spin2bool.swap_variable_domain(data_0)
+    data_2 = spin2bool.swap_variable_domain(data_1)
 
     #print(json.dumps(data_2))
     #print('')

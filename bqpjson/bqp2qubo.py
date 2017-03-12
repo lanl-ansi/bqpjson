@@ -1,9 +1,10 @@
-#!/usr/bin/env python2
+#!/usr/bin/env python3
 
 import sys, json, argparse
 
 from bqpjson.core import print_err
 from bqpjson.core import validate
+from bqpjson.core import bqpjson2qubo
 
 # converts a bqp-json file to a qubo data file
 def main(args, data_stream):
@@ -12,40 +13,8 @@ def main(args, data_stream):
     except:
         print_err('unable to parse stdin as a json document')
         quit()
-    validate(data)
 
-    if data['variable_domain'] == 'spin':
-        print_err('Error: unable to generate qubo data file from stdin, only boolean domains are supported by qubo')
-        quit()
-
-    print('c id : {}'.format(data['id']))
-
-    if 'description' in data:
-        print('c description : {}'.format(data['description']))
-    print('c ')
-
-    print('c scale : {}'.format(data['scale']))
-    print('c offset : {}'.format(data['offset']))
-    print('c ')
-
-    for k in sorted(data['metadata']):
-         print('c {} : {}'.format(k, json.dumps(data['metadata'][k], sort_keys=True)))
-    if len(data['metadata']):
-        print('c ')
-
-    max_index = max(data['variable_ids'])+1 if len(data['variable_ids']) > 0 else 0
-    num_diagonals = len(data['linear_terms'])
-    num_elements = len(data['quadratic_terms'])
-
-    print('p qubo 0 {} {} {}'.format(max_index, num_diagonals, num_elements))
-
-    print('c linear terms')
-    for term in data['linear_terms']:
-        print('{} {} {}'.format(term['id'], term['id'], term['coeff']))
-
-    print('c quadratic terms')
-    for term in data['quadratic_terms']:
-        print('{} {} {}'.format(term['id_tail'], term['id_head'], term['coeff']))
+    bqpjson2qubo(data=data, out_stream=sys.stdout)
 
 
 def build_cli_parser():
