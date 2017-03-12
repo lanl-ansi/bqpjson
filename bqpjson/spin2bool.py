@@ -3,8 +3,8 @@
 import sys, json, argparse, copy
 
 from bqpjson.core import print_err
-from bqpjson.core import validate
-from bqpjson.core import swap_variable_domain
+from bqpjson import validate
+from bqpjson import swap_variable_domain
 
 json_dumps_kwargs = {
     'sort_keys':True,

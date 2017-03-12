@@ -3,8 +3,8 @@
 import sys, json, argparse
 
 from bqpjson.core import print_err
-from bqpjson.core import validate
-from bqpjson.core import bqpjson_to_qubist
+from bqpjson import validate
+from bqpjson import bqpjson_to_qubist
 
 # converts a bqp-json file to a qubist hamiltonian
 def main(args, data_stream):
