@@ -57,6 +57,7 @@ setup(
     license='BSD',
     long_description=long_description,
     url='https://github.com/lanl-ansi/bqpjson',
+    download_url='https://github.com/lanl-ansi/bqpjson/archive/{}.tar.gz'.format(find_version('bqpjson', '__init__.py')),
     entry_points={'console_scripts': [
         'bqp2qh = bqpjson.cli:bqp2qh',
         'bqp2qubo = bqpjson.cli:bqp2qubo',
