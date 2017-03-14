@@ -1,7 +1,6 @@
 ==========
 bqpjson
 ==========
-Utilities for working with bqpjson data
 
 **dev status:**
 
@@ -15,8 +14,10 @@ Utilities for working with bqpjson data
   :target: http://bqpjson.readthedocs.io/en/latest/?badge=latest
   :alt: Documentation Status
 
+bqpjson is a minimalist python package for working with bqpjson data files, a json-based encoding of binary quadratic programs.  A detailed description of the bqpjson data format is available `here <http://bqpjson.readthedocs.io/en/latest/bqpjson_format.html>`_.
 
-The bqpjson toolset includes:
+
+**The bqpjson toolset includes:**
 
 - *bqpjson* - a python library for the validation and transformation of bqpjson data
 - *bqpjson-schema.json* - a JSON-Schema for bqpjson data files

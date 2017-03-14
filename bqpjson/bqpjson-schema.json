@@ -6,7 +6,7 @@
   "properties": {
     "variable_domain": {
       "type":"version",
-      "enum":["0.1.0"]
+      "enum":["1.0.0"]
     },
     "id": {
       "type":"integer",

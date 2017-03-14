@@ -14,7 +14,7 @@ print_err = partial(print, file=sys.stderr)
 with open(os.path.join(os.path.dirname(os.path.abspath(__file__)), 'bqpjson-schema.json')) as file:
     _qbpjson_schema = json.load(file)
 
-_bqpjson_versions = ['0.1.0']
+_bqpjson_versions = ['1.0.0']
 _bqpjson_version_latest = _bqpjson_versions[-1]
 
 

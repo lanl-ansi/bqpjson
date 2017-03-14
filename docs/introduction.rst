@@ -15,3 +15,11 @@ bqpjson is not currently available on pypi.  The simplest installation is to che
 
     pip install .
 
+
+Testing
+------------------------
+
+bqpjson can be tested using setup.py, simply run::
+
+    python steup.py test
+
