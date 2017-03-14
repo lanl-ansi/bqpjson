@@ -31,6 +31,28 @@ The package can be installed via::
 - *bqp2mzn* - a command line tool for converting bqpjson data into a minizinc model
 
 
+**An example of bqpjson data**::
+
+    {
+      "description":"a simple model",
+      "id": 0,
+      "linear_terms": [
+        {"coeff":  1.3, "id": 2},
+        {"coeff": -0.7, "id": 6}
+      ],
+      "metadata": {},
+      "offset": 0.0,
+      "quadratic_terms": [
+        {"coeff": -0.2, "id_head": 4, "id_tail": 2},
+        {"coeff":  1.5, "id_head": 6, "id_tail": 2}
+      ],
+      "scale": 1.0,
+      "variable_domain": "spin",
+      "variable_ids": [2,4,6],
+      "version": "1.0.0"
+    }
+
+
 License
 ------------
 bqpjson is developed at Los Alamos National Laboratory and is provided under a BSD-ish license with a "modifications must be indicated" clause.  See the `LICENSE.md` file for the full text.  This package is part of the Hybrid Quantum-Classical Computing suite, known internally as LA-CC-16-032.
