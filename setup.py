@@ -4,7 +4,6 @@ import re
 
 from setuptools import setup
 
-
 here = os.path.abspath(os.path.dirname(__file__))
 
 def read(*parts):
@@ -47,12 +46,14 @@ setup(
     version=find_version('bqpjson', '__init__.py'),
     packages=['bqpjson'],
     package_data={'bqpjson': ['*.json']},
-    setup_requires=['jsonschema>=2.6.0'],
-    #extras_require={'testing': ['pytest']},
+    install_requires=['jsonschema==2.6.0'],
+    setup_requires=['pytest-runner'],
+    tests_require=['pytest-cov'],
+    test_suite="tests",
     author='Carleton Coffrin',
     author_email='cjc@lanl.gov',
     classifiers=classifiers,
-    description='utilities for working with bqp-json data',
+    description='utilities for working with bqpjson data',
     license='BSD',
     long_description=long_description,
     url='https://github.com/lanl-ansi/bqpjson',
@@ -62,6 +63,5 @@ setup(
         'bqp2mzn = bqpjson.cli:bqp2mzn',
         'spin2bool = bqpjson.cli:spin2bool'
     ]},
-    #vcversioner={'version_module_paths' : ['jsonschema/_version.py']},
 )
 
