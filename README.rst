@@ -14,17 +14,21 @@ bqpjson
   :target: http://bqpjson.readthedocs.io/en/latest/?badge=latest
   :alt: Documentation Status
 
-bqpjson is a minimalist python package for working with bqpjson data files, a json-based encoding of binary quadratic programs.  A detailed description of the bqpjson data format is available `here <http://bqpjson.readthedocs.io/en/latest/bqpjson_format.html>`_.
+bqpjson is a minimalist python package for working with bqpjson data files, a json-based encoding of binary quadratic programs.  A detailed description of the bqpjson data format is available `here <http://bqpjson.readthedocs.io/en/latest/bqpjson_format.html>`_.  
+
+The package can be installed via::
+
+    pip install bqpjson
 
 
 **The bqpjson toolset includes:**
 
-- *bqpjson* - a python library for the validation and transformation of bqpjson data
+- *bqpjson* - python tools for the validation and transformation of bqpjson data (`documentation <http://bqpjson.readthedocs.io/en/latest/>`_)
 - *bqpjson-schema.json* - a JSON-Schema for bqpjson data files
 - *spin2bool* - a command line tool for converting a bqpjson data files between the spin and boolean variable spaces
 - *bqp2qh* - a command line tool for converting bqpjson data files into a qubist compatible hamiltonians
-- *bqp2qubo* - a command line tool for converting bqp-json data into a qubo data
-- *bqp2mzn* - a command line tool for converting bqp-json data into a minizinc model
+- *bqp2qubo* - a command line tool for converting bqpjson data into a qubo data
+- *bqp2mzn* - a command line tool for converting bqpjson data into a minizinc model
 
 
 License
