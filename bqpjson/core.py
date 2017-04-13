@@ -1,34 +1,22 @@
 from __future__ import print_function
 
-import os, sys, json, copy
+import os, sys, json, copy, math
 
 from io import IOBase
-from functools import partial
-#from functools import singledispatch
+import fractions
+import itertools
+import functools
 
 import jsonschema
 
 # prints a line to standard error
-print_err = partial(print, file=sys.stderr)
+print_err = functools.partial(print, file=sys.stderr)
 
 with open(os.path.join(os.path.dirname(os.path.abspath(__file__)), 'bqpjson-schema.json')) as file:
     _qbpjson_schema = json.load(file)
 
 _bqpjson_versions = ['1.0.0']
 _bqpjson_version_latest = _bqpjson_versions[-1]
-
-
-# @singledispatch
-# def load_data(data):
-#     return data
-
-# @load_data.register(str)
-# def _(data):
-#     return json.loads(data)
-
-# @load_data.register(IOBase)
-# def _(data):
-#     return json.load(data)
 
 
 def validate(data):
@@ -227,10 +215,10 @@ def bool_to_spin(bool_data):
 def bqpjson_to_qubist(data, out_stream):
     validate(data)
 
-    print2out = partial(print, file=out_stream)
+    print2out = functools.partial(print, file=out_stream)
 
     if data['variable_domain'] == 'boolean':
-        print_err('Error: unable to generate qubist hamiltonian from stdin, only spin domains are supported by qubist')
+        print_err('Error: unable to generate qubist hamiltonian, only spin domains are supported by qubist')
         quit()
 
     quadratic_terms = {}
@@ -259,10 +247,10 @@ def bqpjson_to_qubist(data, out_stream):
 def bqpjson_to_qubo(data, out_stream):
     validate(data)
 
-    print2out = partial(print, file=out_stream)
+    print2out = functools.partial(print, file=out_stream)
 
     if data['variable_domain'] == 'spin':
-        print_err('Error: unable to generate qubo data file from stdin, only boolean domains are supported by qubo')
+        print_err('Error: unable to generate qubo data file, only boolean domains are supported by qubo')
         quit()
 
     print2out('c id : {}'.format(data['id']))
@@ -298,7 +286,7 @@ def bqpjson_to_qubo(data, out_stream):
 def bqpjson_to_minizinc(data, out_stream):
     validate(data)
 
-    print2out = partial(print, file=out_stream)
+    print2out = functools.partial(print, file=out_stream)
 
     print2out('% id : {}'.format(data['id']))
 
@@ -362,6 +350,136 @@ def bqpjson_to_minizinc(data, out_stream):
 
 
 
+def bqpjson_to_hfs(data, out_stream, chimera_cell_size=None, chimera_degree=None, precision=5):
+    '''
+    Format description from (https://github.com/alex1770/QUBO-Chimera)
+
+    The format of the instance-description file starts with a line giving the 
+    size of the Chimera graph. (Two numbers are given to specify an m x n
+    rectangle, but currently only a square, m=n, is accepted.)
+    The subsequent lines are of the form
+        <Chimera vertex> <Chimera vertex> weight
+    where <Chimera vertex> is specified by four numbers using the format,
+
+    Chimera graph, C_N:
+        Vertices are (x,y,o,i)  0<=x,y<N, 0<=o<2, 0<=i<4
+        Edge from (x,y,o,i) to (x',y',o',i') if
+        (x,y)=(x',y'), o!=o', OR
+        |x-x'|=1, y=y', o=o'=0, i=i', OR
+        |y-y'|=1, x=x', o=o'=1, i=i'
+         
+        x,y are the horizontal,vertical co-ords of the K4,4
+        o=0..1 is the "orientation" (0=horizontally connected, 1=vertically connected)
+        i=0..3 is the index within the "semi-K4,4"="bigvertex"
+        There is an involution given by {x<->y o<->1-o}
+    '''
+    validate(data)
+
+    print2out = functools.partial(print, file=out_stream)
+
+    if data['variable_domain'] == 'spin':
+        print_err('Error: unable to generate hfs data file, only boolean domains are supported by this translator')
+        quit()
+
+    if len(data['variable_ids']) <= 0:
+        print_err('WARNING: hfs data file with no data')
+        print2out('0 0')
+        return
+        #quit()
+
+    if 'chimera_cell_size' in data['metadata'] and chimera_cell_size == None:
+        chimera_cell_size = data['metadata']['chimera_cell_size']
+
+    if 'chimera_degree' in data['metadata'] and chimera_degree == None:
+        chimera_degree = data['metadata']['chimera_degree']
+
+    if chimera_cell_size == None:
+        chimera_cell_size = 8
+        print_err('WARNING: chimera_cell_size parameter not found, assuming {}'.format(chimera_cell_size))
+
+    min_chimera_degree = int(math.ceil(math.sqrt(max(data['variable_ids'])/float(chimera_cell_size))))
+    if chimera_degree == None:
+        chimera_degree = min_chimera_degree
+        print_err('WARNING: chimera_degree parameter not found, assuming {}'.format(chimera_degree))
+
+    if chimera_degree < min_chimera_degree:
+        print_err('Error: chimera_degree of {} was specified.  However, the minimum chimera_degree of {} is required for a problem with a variable index of {}'.format(chimera_degree, min_chimera_degree, max(data['variable_ids'])))
+        quit()
+
+    chimera_cell_row_size = chimera_cell_size // 2
 
 
+    # These values are used to transform a variable index into a chimera 
+    # coordinate (x,y,o,i)
+    # x - chimera_row
+    # y - chimera_column
+    # o - chimera_cell_column - indicates the first or the second row of a chimera cell
+    # i - chimera_cell_column_id - indicates ids within a chimera cell
+    # Note that knowing the size of source chimera graph is essential to doing this mapping correctly 
+    #
+    chimera_cell_column = {index: (index % chimera_cell_size) // chimera_cell_row_size for index in data['variable_ids']}
+    chimera_cell_column_id = {index:index % chimera_cell_row_size for index in data['variable_ids']}
+    chimera_cell = {index:index // chimera_cell_size for index in data['variable_ids']}
+    chimera_row = {index:chimera_cell_id // chimera_degree for index, chimera_cell_id in chimera_cell.items()}
+    chimera_column = {index:chimera_cell_id % chimera_degree for index, chimera_cell_id in chimera_cell.items()}
+
+    chimera_coordinate = {index:(chimera_row[index], chimera_column[index], chimera_cell_column[index], chimera_cell_column_id[index]) for index in data['variable_ids']}
+
+
+    chimera_degree_effective = max(max(chimera_row.values()), max(chimera_column.values())) + 1
+
+    print_err('hfs data parameters:')
+    print_err('  chimera_cell_size: {}'.format(chimera_cell_size))
+    print_err('  chimera_cell_row_size: {}'.format(chimera_cell_row_size))
+    print_err('  chimera_degree: {}'.format(chimera_degree))
+    print_err('  chimera_degree_effective: {}'.format(chimera_degree_effective))
+
+    assert(chimera_degree_effective <= chimera_degree)
+
+
+    # Scale from floating-point numbers to integers
+    denominators = set()
+    for term in itertools.chain(data['linear_terms'], data['quadratic_terms']):
+        frac_coeff = fractions.Fraction.from_float(term['coeff']).limit_denominator(10**precision)
+        term['frac_coeff'] = frac_coeff
+        denominators.add(frac_coeff.denominator)
+
+    #print(denominators)
+    frac_scale = _lcm(*denominators)
+    #print(frac_scale)
+
+    for term in itertools.chain(data['linear_terms'], data['quadratic_terms']):
+        frac_coeff = term['frac_coeff']
+        term['int_coeff'] = frac_coeff.numerator * (frac_scale // frac_coeff.denominator)
+        #print(frac_coeff, term['int_coeff'])
+
+    print_err('INFO: scaling factor {} offset {}'.format(frac_scale*data['scale'],data['offset']/frac_scale))
+
+
+    # Output the hfs data file
+    # it is a header followed by linear terms and then quadratic terms
+    print2out('%d %d' % (chimera_degree_effective, chimera_degree_effective))
+    for lt in data['linear_terms']:
+        idx = lt['id']
+        weight = lt['int_coeff']
+        args = chimera_coordinate[idx] + chimera_coordinate[idx] + tuple([weight])
+        print2out('%2d %2d %2d %2d    %2d %2d %2d %2d    %8d' % args)
+
+    for qt in data['quadratic_terms']:
+        idx_t = qt['id_tail']
+        idx_h = qt['id_head']
+        weight = qt['int_coeff']
+        args = chimera_coordinate[idx_t] + chimera_coordinate[idx_h] + tuple([weight])
+        print2out('%2d %2d %2d %2d    %2d %2d %2d %2d    %8d' % args)
+
+
+# Greatest common divisor of more than 2 numbers
+def _gcd(*numbers):
+    return functools.reduce(fractions.gcd, numbers)
+
+# Least common multiple of more than 2 numbers:
+def _lcm(*numbers):
+    def lcm(a, b):
+        return (a * b) // _gcd(a, b)
+    return functools.reduce(lcm, numbers, 1)
 

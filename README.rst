@@ -26,9 +26,10 @@ The package can be installed via::
 - *bqpjson* - python tools for the validation and transformation of bqpjson data (`documentation <http://bqpjson.readthedocs.io/en/latest/>`_)
 - *bqpjson-schema.json* - a JSON-Schema for bqpjson data files
 - *spin2bool* - a command line tool for converting a bqpjson data files between the spin and boolean variable spaces
-- *bqp2qh* - a command line tool for converting bqpjson data files into a qubist compatible hamiltonians
-- *bqp2qubo* - a command line tool for converting bqpjson data into a qubo data
+- *bqp2qh* - a command line tool for converting bqpjson data files into qubist compatible hamiltonians
+- *bqp2qubo* - a command line tool for converting bqpjson data into qubo data
 - *bqp2mzn* - a command line tool for converting bqpjson data into a minizinc model
+- *bqp2hfs* - a command line tool for converting bqpjson data into hfs data
 
 
 **An example of bqpjson data**::

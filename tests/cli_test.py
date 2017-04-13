@@ -31,6 +31,10 @@ def test_run_bqp2qubo_bool(bqp_file):
 def test_run_bqp2mzn(bqp_file):
     check_run_func(bqpjson.cli.run_bqp2mzn, bqp_file, bqp_file.replace('.json', '.mzn'))
 
+@pytest.mark.parametrize('bqp_file', valid_bool_bqp_files)
+def test_run_bqp2hfs_bool(bqp_file):
+    check_run_func(bqpjson.cli.run_bqp2hfs, bqp_file, bqp_file.replace('.json', '.hfs'))
+
 @pytest.mark.parametrize('bqp_file', valid_spin_bqp_files)
 def test_run_spin2bool_spin(bqp_file):
     with open(bqp_file.replace('.json', '.qubo'), 'r') as file:

@@ -62,6 +62,7 @@ setup(
         'bqp2qh = bqpjson.cli:bqp2qh',
         'bqp2qubo = bqpjson.cli:bqp2qubo',
         'bqp2mzn = bqpjson.cli:bqp2mzn',
+        'bqp2hfs = bqpjson.cli:bqp2hfs',
         'spin2bool = bqpjson.cli:spin2bool'
     ]},
 )

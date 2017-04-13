@@ -21,5 +21,5 @@ Testing
 
 bqpjson can be tested using setup.py by running::
 
-    python steup.py test
+    python setup.py test
 
