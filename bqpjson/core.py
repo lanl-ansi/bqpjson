@@ -453,7 +453,7 @@ def bqpjson_to_hfs(data, out_stream, chimera_cell_size=None, chimera_degree=None
         term['int_coeff'] = frac_coeff.numerator * (frac_scale // frac_coeff.denominator)
         #print(frac_coeff, term['int_coeff'])
 
-    print_err('INFO: scaling factor {} offset {}'.format(frac_scale*data['scale'],data['offset']/frac_scale))
+    print_err('INFO: scaling factor {} offset {}'.format(data['scale']/frac_scale, data['offset']*frac_scale))
 
 
     # Output the hfs data file
