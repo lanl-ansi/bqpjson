@@ -7,7 +7,7 @@ This document describes **bqpjson**, a json-based encoding for Binary
 Quadratic Programs (B-QP).  The scope of the bqpjson-format is as follows,
 given:
 
-- :math:`x` - a collection of binary variables with domains of :math:`\{-1, 1\}` or :math:`\{0, 1\}`
+- :math:`b` - a collection of binary variables with domains of :math:`\{-1, 1\}` or :math:`\{0, 1\}`
 - :math:`L` - a collection of coefficients for each variable
 - :math:`Q` - a collection of coefficients for products variables
 - :math:`o` - an offset
@@ -16,8 +16,8 @@ given:
 The bqpjson-format encodes the following mathematical program,
 
 .. math::
-  \min\mbox{: } & \boldsymbol s \left(\sum_{(c,i,j) \in Q} \boldsymbol c x_i x_j + \sum_{(c,i) \in L} \boldsymbol c x_i + \boldsymbol o \right) \\
-  & x \in \{-1, 1\} \mbox{ or } \{0, 1\}
+  \min\mbox{: } & \boldsymbol s \left(\sum_{(c,i,j) \in Q} \boldsymbol c b_i b_j + \sum_{(c,i) \in L} \boldsymbol c b_i + \boldsymbol o \right) \\
+  & b \in \{-1, 1\} \mbox{ or } \{0, 1\}
 
 The goal of bqpjson is to provide a simple language-agnostic data standard for encoding such B-QPs, to assist in research and development of B-QP solution methods.
 
