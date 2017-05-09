@@ -23,7 +23,7 @@ The goal of bqpjson is to provide a simple language-agnostic data standard for e
 
 Additionally, given the significant interest in using D-Wave's QPU for
 solving B-QP problems, bqpjson includes key features to assist in
-encoding D-Wave inspired test cases.
+encoding D-Wave inspired test cases.  bqpjson is effectivly a bytecode for B-QP models targeting a wide variety of solution methods.
 
 Design Motivations
 -------------------------
