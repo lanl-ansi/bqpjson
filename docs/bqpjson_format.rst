@@ -202,7 +202,8 @@ A solution object has the form,
 
 Where: 
 
-- *id* - is an identifier of the solution \* *assignment* - a list of assignment values for each variable defined in "variable\_ids"
+- *id* - is an identifier of the solution 
+- *assignment* - a list of assignment values for each variable defined in "variable\_ids"
 - *description* - a textual description of what this solution is 
 - *evaluation* - the evaluation of this solution in the given B-QP, to provided a correctness check
 
