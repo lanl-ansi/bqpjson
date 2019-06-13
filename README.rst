@@ -57,3 +57,22 @@ The package can be installed via::
 License
 ------------
 bqpjson is developed at Los Alamos National Laboratory and is provided under a BSD-ish license with a "modifications must be indicated" clause.  See the `LICENSE.md` file for the full text.  This package is part of the Hybrid Quantum-Classical Computing suite, known internally as LA-CC-16-032.
+
+
+Changelog
+------------
+
+**staged**
+
+- nothing
+
+
+**v0.5.1**
+
+- added support for translation to the HFS data format
+
+
+**v0.5.0**
+
+- initial release
+
