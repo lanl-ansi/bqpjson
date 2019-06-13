@@ -13,7 +13,7 @@ print('git describe: {}'.format(git_describe))
 git_version = git_describe.split('-')[0].strip('v')
 print('git version: {}'.format(git_version))
 
-print('grg_mpdata version: {}'.format(py_version))
+print('bqpjson version: {}'.format(py_version))
 
 py_version_parts = [int(x) for x in py_version.split('.')]
 git_version_parts = [int(x) for x in git_version.split('.')]

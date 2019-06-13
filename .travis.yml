@@ -13,3 +13,12 @@ script:
   - ./check_version.py
 after_success:
   - codecov
+deploy:
+  - provider: pypi
+    user: ccoffrin
+    password:
+      secure: pUaPLfTRFDbN9eP12c7VfUjLKaJz2WxN6vLGhkH2V/VbirJ2JrPb4mI+078VhHu3A47sMlS2k8zW6SLZdOImaU/idfxbDv+NgwiCcoKon4Xq23M0+FlTc+nOqitwcqrzZKEifcJsXV5N0RJf7fRlGSJYLvpV21mhvN0WgA4zkVR07tFAX0QJ97IYMr8S31T+SZbIF6oQ4cjnvljmCBQXyBVx/H8eFmwi07spquhg+X912Adll77AYSSgZuU84Ln+gPlT7nLUgL5X5pNcY0sPVI+Ct1a6ljRfSH1jw40kjhUynASTLBm0np/9QZjJZfhn6jOUeLuH5f7Aal6R0+VKjzSOrAsMMTBVmrtE0VOp2OFYZYyPL0NbUEyhRCTP4rOu0REOAxltFymAz+2HcS2Njy1rlFx8csjRR/0vZuTRlsBcmK4HdWiafiPHZPrGfgTmDIVV0YJNZ5RlHsk7XFrDHpKv632BHZ0vkpWYbW9UeekhGvBJsyukakN4KZy2mmWFeNH/Fh/fsJYA1KzzfnPO8OIis1ZPzJ/Bl+PcDvsosx9sXzTvYLSSMUA3bgm+AvFlfaXfny5U4S4mn4IFL4S/iCu4QnEgIAc05Qu4C/505Nq4Dz0wuOxSFX3oQlbdnk6IrqMe85ywBuSOcQnH1FXA4uct+qpPicLN7PL3Y6n9f7A=
+    on:
+      tags: true
+      branch: master
+      condition: $TRAVIS_PYTHON_VERSION = '3.6'
