@@ -436,25 +436,13 @@ def bqpjson_to_hfs(data, out_stream, chimera_cell_size=None, chimera_degree=None
 
     assert(chimera_degree_effective <= chimera_degree)
 
-
-    # Scale from floating-point numbers to integers
-    denominators = set()
-    for term in itertools.chain(data['linear_terms'], data['quadratic_terms']):
-        frac_coeff = fractions.Fraction.from_float(term['coeff']).limit_denominator(10**precision)
-        term['frac_coeff'] = frac_coeff
-        denominators.add(frac_coeff.denominator)
-
-    #print(denominators)
-    frac_scale = _lcm(*denominators)
-    #print(frac_scale)
+    max_abs_coeff = max(abs(t['coeff']) for t in itertools.chain(data['linear_terms'], data['quadratic_terms']))
+    scale = 10 ** precision / max_abs_coeff
 
     for term in itertools.chain(data['linear_terms'], data['quadratic_terms']):
-        frac_coeff = term['frac_coeff']
-        term['int_coeff'] = frac_coeff.numerator * (frac_scale // frac_coeff.denominator)
-        #print(frac_coeff, term['int_coeff'])
+        term['int_coeff'] = round(term['coeff'] * scale)
 
-    print_err('INFO: scaling factor {} offset {}'.format(data['scale']/frac_scale, data['offset']*frac_scale))
-
+    print_err('INFO: scaling factor {} offset {}'.format(data['scale']/scale, data['offset']*scale))
 
     # Output the hfs data file
     # it is a header followed by linear terms and then quadratic terms
