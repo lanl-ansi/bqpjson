@@ -30,14 +30,10 @@ classifiers = [
     'License :: OSI Approved :: BSD License',
     'Operating System :: OS Independent',
     'Programming Language :: Python',
-    'Programming Language :: Python :: 2',
-    'Programming Language :: Python :: 2.7',
     'Programming Language :: Python :: 3',
-    'Programming Language :: Python :: 3.4',
     'Programming Language :: Python :: 3.5',
     'Programming Language :: Python :: 3.6',
-#    'Programming Language :: Python :: Implementation :: CPython',
-#    'Programming Language :: Python :: Implementation :: PyPy',
+    'Programming Language :: Python :: 3.7',
 ]
 
 
@@ -47,7 +43,7 @@ setup(
     packages=['bqpjson'],
     package_data={'bqpjson': ['*.json']},
     install_requires=['jsonschema==2.6.0'],
-    setup_requires=['pytest-runner'],
+    setup_requires=['pytest-runner==4.5.1'],
     tests_require=['pytest-cov'],
     test_suite="tests",
     author='Carleton Coffrin',
