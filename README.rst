@@ -2,6 +2,16 @@
 bqpjson
 ==========
 
+**release:**
+
+.. image:: https://badge.fury.io/py/bqpjson.svg
+    :target: https://badge.fury.io/py/bqpjson
+
+.. image:: https://readthedocs.org/projects/bqpjson/badge/?version=stable
+  :target: http://bqpjson.readthedocs.io/en/stable/?badge=stable
+  :alt: Documentation Status
+
+
 **dev status:**
 
 .. image:: https://travis-ci.org/lanl-ansi/bqpjson.svg?branch=master
