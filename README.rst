@@ -74,6 +74,11 @@ Changelog
 
 **staged**
 
+- nothing
+
+
+**v0.5.2**
+
 - improved bqp2hfs robustness to coefficient precision issues
 - dropped support for python 2.7 and 3.4
 

@@ -1,5 +1,5 @@
 
-__version__ = '0.5.1'
+__version__ = '0.5.2'
 
 from bqpjson.core import (
     validate, evaluate, swap_variable_domain, spin_to_bool, bool_to_spin,
