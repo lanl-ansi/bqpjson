@@ -2,6 +2,16 @@
 bqpjson
 ==========
 
+**release:**
+
+.. image:: https://badge.fury.io/py/bqpjson.svg
+    :target: https://badge.fury.io/py/bqpjson
+
+.. image:: https://readthedocs.org/projects/bqpjson/badge/?version=stable
+  :target: http://bqpjson.readthedocs.io/en/stable/?badge=stable
+  :alt: Documentation Status
+
+
 **dev status:**
 
 .. image:: https://travis-ci.org/lanl-ansi/bqpjson.svg?branch=master
@@ -64,7 +74,8 @@ Changelog
 
 **staged**
 
-- nothing
+- improved bqp2hfs robustness to coefficient precision issues
+- dropped support for python 2.7 and 3.4
 
 
 **v0.5.1**
