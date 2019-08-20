@@ -77,6 +77,11 @@ Changelog
 - nothing
 
 
+**v0.5.3**
+
+- added scaling and offset return values to bqpjson_to_hfs
+
+
 **v0.5.2**
 
 - improved bqp2hfs robustness to coefficient precision issues

@@ -384,7 +384,7 @@ def bqpjson_to_hfs(data, out_stream, chimera_cell_size=None, chimera_degree=None
     if len(data['variable_ids']) <= 0:
         print_err('WARNING: hfs data file with no data')
         print2out('0 0')
-        return
+        return 0.0, 0.0
         #quit()
 
     if 'chimera_cell_size' in data['metadata'] and chimera_cell_size == None:
@@ -459,6 +459,8 @@ def bqpjson_to_hfs(data, out_stream, chimera_cell_size=None, chimera_degree=None
         weight = qt['int_coeff']
         args = chimera_coordinate[idx_t] + chimera_coordinate[idx_h] + tuple([weight])
         print2out('%2d %2d %2d %2d    %2d %2d %2d %2d    %8d' % args)
+
+    return data['scale']/scale, data['offset']*scale
 
 
 # Greatest common divisor of more than 2 numbers

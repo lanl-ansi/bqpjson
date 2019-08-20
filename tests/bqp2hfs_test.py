@@ -4,6 +4,7 @@ import bqpjson
 
 from common_test import valid_spin_bqp_files
 from common_test import valid_bool_bqp_files
+from common_test import isclose
 from common_test import StringIO
 
 
@@ -18,7 +19,7 @@ def test_bqp2hfs_spin(bqp_file, capsys):
     data_bool = bqpjson.swap_variable_domain(data_spin)
 
     out = StringIO()
-    bqpjson.bqpjson_to_hfs(data_bool, out)
+    hfs_scale, hfs_offset = bqpjson.bqpjson_to_hfs(data_bool, out)
 
     assert(out.getvalue().strip() == base.strip())
 
@@ -32,7 +33,8 @@ def test_bqp2hfs_bool(bqp_file, capsys):
         data = json.load(file)
 
     out = StringIO()
-    bqpjson.bqpjson_to_hfs(data, out)
+    hfs_scale, hfs_offset = bqpjson.bqpjson_to_hfs(data, out)
+    assert(not isclose(hfs_scale, 0.0))
 
     assert(out.getvalue().strip() == base.strip())
 
